@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GateFi Embed SDK Example</title>
+</head>
+<body>
+  <h1>GateFi Embed SDK Example</h1>
+  <h3>You need to open this html in an server side tech, like nodejs, apache, nginx, etc.</h3>
+  <div id="embed-container"></div>
+  
+  <script type="module">
+    import * as GateFiSDK from './gatefiSDK.js'; //you need to 
+    window.GateFiSDK = GateFiSDK;
+    console.log(typeof GateFiSDK);
+    console.log(GateFiSDK);
+  
+    if (typeof gateFiSDK !== 'undefined') {
+      // Set properties of GateFiSDK
+      console.log('ok');
+      console.log(gateFiSDK);
+        console.log(gateFiSDK.prototype);
+        console.log(typeof GateFiSDK);
+
+        console.log(GateFiSDK);
+        console.log(GateFiSDK.GateFiDisplayModeEnum);
+        console.log(GateFiSDK.GateFiDisplayModeEnum.Embedded);
+        console.log(Object.getOwnPropertyNames(GateFiSDK));  
+        console.log(GateFiSDK.GateFiDisplayModeEnum);
+        console.log(GateFiSDK.GateFiDisplayModeEnum.Embedded);
+        console.log(Object.getOwnPropertyNames(GateFiSDK));    
+
+        let obj = GateFiSDK;
+            while (obj) {
+            console.log(Object.getOwnPropertyNames(obj));
+            obj = Object.getPrototypeOf(obj);
+            }
+
+    //params for the sdk        
+    var amount = "30";
+    var amount2 = Number(amount);
+    var fiatCurrency = "USD";
+    var email = "test@test.com";
+    var wallet = "0xE37EeCDFC75e810F58c5345dC8596Fe8370CF3d3";
+    var cryptocurrency = "ETH";
+  
+    //ARRAY OF PARAMS   
+    var params = [amount2, fiatCurrency, email, wallet, cryptocurrency];
+
+    
+    if (!window.embedInstanceSDK) {
+            window.embedInstanceSDK = {};
+        }
+    console.log(window.embedInstanceSDK);
+
+    window.embedInstanceSDK.current =  new gateFiSDK.GateFiSDK({
+        merchantId: "c5872d1c-2e4c-4edc-8749-7e99c263a5aa",
+        displayMode: "embedded",
+        nodeSelector: "#embed-container",
+        isSandbox: true,
+        walletAddress: params[3],
+        email: params[2],
+        externalId: "123456789",
+        walletLock: true,
+        fiatAmountLock: true,
+        cryptoAmountLock: true,
+        fiatCurrencyLock: true,
+        cryptoCurrencyLock: true,
+        hideThemeSwitcher: true,
+        successUrl: '',
+        cancelUrl: '',
+        declineUrl: '',
+        hideAsset: true,
+        defaultFiat: {
+          currency: params[1],
+          amount: params[0],
+        },
+        defaultCrypto: {
+          currency: params[4]
+        },
+        styles: {
+          type: "dark",
+          primaryBackground: "#1A1F24",
+          secondaryBackground: "#1A1F24",
+          primaryColor: "#00968A",
+          primaryTextColor: "#ffffff"
+        }
+      });
+    } else {
+      console.error('GateFiSDK is set to undefined');
+    }
+  </script>
+
+</body>
+</html>
